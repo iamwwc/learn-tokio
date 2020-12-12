@@ -112,6 +112,8 @@ impl Driver {
     /// Creates a new event loop, returning any error that happened during the
     /// creation.
     pub(crate) fn new() -> io::Result<Driver> {
+        // LEARN 这里创建 eventloop
+        // waker 是 mio 的可以跨线程唤醒 task 的对象
         let poll = mio::Poll::new()?;
         let waker = mio::Waker::new(poll.registry(), TOKEN_WAKEUP)?;
         let registry = poll.registry().try_clone()?;
